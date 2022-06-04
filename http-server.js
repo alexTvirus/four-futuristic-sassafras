@@ -14,7 +14,7 @@ var count = 400
 
 app.get('/count', (req, res) => {
   count++;
-  return res.send(count);
+  return res.send(`${count}`);
 });
 
 app.post('/git', (req, res) => {
