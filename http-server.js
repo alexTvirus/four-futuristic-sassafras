@@ -6,6 +6,10 @@ app.post('/', (req, res) => {
   return res.sendStatus(101);
 });
 
+app.get('/test', (req, res) => {
+  return res.sendStatus(200);
+});
+
 app.post('/git', (req, res) => {
   // If event is "push"
   if (req.headers['x-github-event'] == "push") {
