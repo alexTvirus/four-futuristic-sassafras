@@ -10,6 +10,13 @@ app.get('/test', (req, res) => {
   return res.sendStatus(200);
 });
 
+var count = 400
+
+app.get('/count', (req, res) => {
+  count++;
+  return res.send(count);
+});
+
 app.post('/git', (req, res) => {
   // If event is "push"
   if (req.headers['x-github-event'] == "push") {
