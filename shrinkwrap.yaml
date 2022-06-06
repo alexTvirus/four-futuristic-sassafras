@@ -1,4 +1,5 @@
 dependencies:
+  body-parser: 1.20.0
   express: 4.18.1
   node-cmd: 5.0.0
   ws: 5.2.3
@@ -449,6 +450,7 @@ registry: 'https://registry.npmjs.org/'
 shrinkwrapMinorVersion: 9
 shrinkwrapVersion: 3
 specifiers:
+  body-parser: ^1.20.0
   express: ^4.16.2
   node-cmd: ^5.0.0
   ws: ^5.2.3
