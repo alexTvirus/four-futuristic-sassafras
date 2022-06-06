@@ -10,6 +10,10 @@ app.get('/test', (req, res) => {
   return res.sendStatus(200);
 });
 
+app.get('/test1', (req, res) => {
+  return res.sendStatus(200);
+});
+
 var count = 400
 
 app.get('/count', (req, res) => {
