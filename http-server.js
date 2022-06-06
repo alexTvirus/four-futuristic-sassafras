@@ -1,7 +1,8 @@
 const express = require('express');
 const cmd = require("node-cmd");
 const app = express();
-
+const bodyParser = require('body-parser');
+app.use(bodyParser);
 app.post('/', (req, res) => {
   return res.sendStatus(101);
 });
@@ -15,6 +16,7 @@ app.get('/test1', (req, res) => {
 });
 
 app.post('/test2', (req, res) => {
+  console.log(req.body)
   return res.sendStatus(200);
 });
 
