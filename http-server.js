@@ -1,5 +1,7 @@
 const express = require('express');
 const cmd = require("node-cmd");
+const nodestatic = require('node-static');
+const distFolder = new nodestatic.Server('./public');
 const app = express();
 
 app.post('/', (req, res) => {
@@ -8,6 +10,15 @@ app.post('/', (req, res) => {
 
 app.get('/test', (req, res) => {
   return res.sendStatus(200);
+});
+
+app.get('/testproxy', (req, res) => {
+  distFolder.serve(req, res, function (err, result) {
+            // Fallback for history mode
+            if (err !== null && err.status === 404) {
+                distFolder.serveFile('/nnn.html', 200, {}, req, res);
+            }
+        });
 });
 
 app.get('/test1', (req, res) => {

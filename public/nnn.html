@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html>
+<script>
+		function isValidHttpUrl(string) {
+		  let url;
+		  
+		  try {
+			url = new URL(string);
+		  } catch (_) {
+			return false;  
+		  }
+
+		  return url.protocol === 'http:' || url.protocol === 'https:';
+		}
+
+	function interceptNetworkRequests(ee) {
+		const open = XMLHttpRequest.prototype.open;
+		const send = XMLHttpRequest.prototype.send;
+
+		const isRegularXHR = open.toString().indexOf('native code') !== -1;
+
+		if (isRegularXHR) {
+			XMLHttpRequest.prototype.open = function() {
+				ee.onOpen && ee.onOpen(this, arguments);
+				if(isValidHttpUrl(arguments[1])){
+					var url = new URL(arguments[1]); url.hostname = 'infinityproxy.tk'; arguments[1] = url.toString();
+				}
+	
+				if (ee.onLoad) {
+					this.addEventListener('load', ee.onLoad.bind(ee));
+				}
+				if (ee.onError) {
+					this.addEventListener('error', ee.onError.bind(ee));
+				}
+				return open.apply(this, arguments);
+			};
+			XMLHttpRequest.prototype.send = function() {
+				ee.onSend && ee.onSend(this, arguments);
+				return send.apply(this, arguments);
+			};
+		}
+
+		const fetch = window.fetch || '';
+
+		const isFetchNative = fetch.toString().indexOf('native code') !== -1;
+		if (isFetchNative) {
+			window.fetch = function() {
+				ee.onFetch && ee.onFetch(arguments);
+				if(isValidHttpUrl(arguments[0])){
+					var url = new URL(arguments[0]); url.hostname = 'infinityproxy.tk'; arguments[0] = url.toString();
+				}
+				const p = fetch.apply(this, arguments);
+				p.then(ee.onFetchResponse, ee.onFetchError);
+				return p;
+			};
+		
+			const json = Response.prototype.json;
+			const text = Response.prototype.text;
+			const blob = Response.prototype.blob;
+			Response.prototype.json = function() {
+				const p = json.apply(this, arguments);
+				p.then(ee.onFetchLoad && ee.onFetchLoad.bind(ee, 'json'));
+				return p;
+			};
+			Response.prototype.text = function() {
+				const p = text.apply(this, arguments);
+				p.then(ee.onFetchLoad && ee.onFetchLoad.bind(ee, 'text'));
+				return p;
+			};
+			Response.prototype.blob = function() {
+				const p = blob.apply(this, arguments);
+				p.then(ee.onFetchLoad && ee.onFetchLoad.bind(ee, 'blob'));
+				return p;
+			};
+		}
+		return ee;
+	}
+
+
+</script>
+<body>
+	<form method="POST" action="https://httpbin.org/post">
+   <p><label>Customer name: <input name="custname"></label></p>
+   <p><label>Telephone: <input type="tel" name="custtel"></label></p>
+   <p><label>E-mail address: <input type="email" name="custemail"></label></p>
+   <fieldset>
+    <legend> Pizza Size </legend>
+    <p><label> <input type="radio" name="size" value="small"> Small </label></p>
+    <p><label> <input type="radio" name="size" value="medium"> Medium </label></p>
+    <p><label> <input type="radio" name="size" value="large"> Large </label></p>
+   </fieldset>
+   <fieldset>
+    <legend> Pizza Toppings </legend>
+    <p><label> <input type="checkbox" name="topping" value="bacon"> Bacon </label></p>
+    <p><label> <input type="checkbox" name="topping" value="cheese"> Extra Cheese </label></p>
+    <p><label> <input type="checkbox" name="topping" value="onion"> Onion </label></p>
+    <p><label> <input type="checkbox" name="topping" value="mushroom"> Mushroom </label></p>
+   </fieldset>
+   <p><label>Preferred delivery time: <input type="time" min="11:00" max="21:00" step="900" name="delivery"></label></p>
+   <p><label>Delivery instructions: <textarea name="comments"></textarea></label></p>
+   <p><button>Submit order</button></p>
+  </form>
+
+<h1>Getting server updates</h1>
+<div id="result"></div>
+<button onclick="myclick()">sendsocket1</button>
+<button onclick="send()">sendsocket2</button>
+<button onclick="closesocket()">sendsocket3</button>
+<input type="text" id="text"/>
+<button onclick="test4()">send</button>
+<script>
+	var source;
+
+	function myclick() {
+		source = new WebSocket("wss://socket.lisatthu354665.workers.dev");
+		//var source = new EventSource("https://cors-anywhere.herokuapp.com/http://alice35.pythonanywhere.com/home1");
+		//var source = new EventSource("http://lolmemai.pythonanywhere.com/stream?k=2");
+
+		source.onopen = function() {
+
+			// Web Socket is connected, send data using send()
+			source.send("HELLO 852978");
+			document.getElementById("result").innerHTML += "ok <br>";
+		};
+
+		source.onmessage = function(event) {
+			document.getElementById("result").innerHTML += event.data + "<br>";
+
+		};
+		
+		source.onclose = function(event) {
+			document.getElementById("result").innerHTML += event.data+ " <br>";
+		};
+
+	}
+
+	function send() {
+		source.send("SESSION " + document.getElementById("text").value);
+	}
+
+	function closesocket() {
+		source.close();
+	}
+
+	window.tdiff = [];
+	fred = function(a, b) {
+		return a - b;
+	};
+	window.onload = function(e) {
+
+	}
+
+	function test() {
+		var xhr = new XMLHttpRequest()
+		xhr.open('POST', 'https://httpbin.org/post', false);
+		xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+		xhr.send('login=test&password=test');
+		return xhr.response;
+
+	}
+
+	function test2() {
+		fetch('https://httpbin.org/post', {
+				method: 'POST',
+				headers: {
+					'Accept': 'application/json, text/plain, */*',
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify({
+					login: 'test',
+					password: 'test'
+				})
+			}).then(res => res.json())
+			.then(res => console.log(res));
+
+	}
+
+	function test3() {
+		axios({
+				method: 'post',
+				url: 'https://httpbin.org/post',
+				data: {
+					login: 'test',
+					password: 'test'
+				}
+			}).then(function(response) {
+				console.log(response);
+			})
+			.catch(function(error) {
+				console.log(error);
+			});
+
+	}
+	
+	function test4() {
+		axios({
+				method: 'post',
+				url: 'https://localhost/countdown2',
+				data: {
+					login: 'test',
+					password: 'test'
+				}
+			}).then(function(response) {
+				console.log(response);
+			})
+			.catch(function(error) {
+				console.log(error);
+			});
+
+	}
+	// document.addEventListener("click", myFunction);
+
+	// function myFunction() {
+
+	// }
+
+	// window.fetch = new Proxy(window.fetch, {
+	// 	apply(fetch, that, args) {
+	// 		// Forward function call to the original fetch
+	// 		let obj = JSON.parse(args[1]['body']);
+	// 		obj['login'] = 'cac'
+	// 		obj = JSON.stringify(obj)
+	// 		args[1]['body'] = obj
+	// 		args[1].headers['test'] = 'cac'
+	// 		const result = fetch.apply(that, args);
+
+	// 		// Do whatever you want with the resulting Promise
+	// 		result.then((response) => {
+	// 			console.log("fetch completed!", args, response);
+	// 		});
+
+	// 		return result;
+	// 	}
+	// });
+
+
+</script>
+<script>
+if ("serviceworker" in navigator) {
+  navigator.serviceWorker.register('sw.js').then(function(reg){
+     if (reg.active) console.log('serviceworker installed')
+  })
+  .catch(function(err){
+     console.log('registration failed: ' + err)
+   })
+}
+
+
+
+async function websocket(url) {
+  // Make a fetch request including `Upgrade: websocket` header.
+  // The Workers Runtime will automatically handle other requirements
+  // of the WebSocket protocol, like the Sec-WebSocket-Key header.
+  let resp = await fetch(url, {
+    headers: {
+      Upgrade: 'websocket',
+    },
+  });
+
+  // If the WebSocket handshake completed successfully, then the
+  // response has a `webSocket` property.
+  let ws = resp.webSocket;
+  if (!ws) {
+    throw new Error("server didn't accept WebSocket");
+  }
+
+  // Call accept() to indicate that you'll be handling the socket here
+  // in JavaScript, as opposed to returning it on to a client.
+  ws.accept();
+
+  // Now you can send and receive messages like before.
+  ws.send('hello');
+  ws.addEventListener('message', msg => {
+    console.log(msg.data);
+  });
+}
+</script>
+
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</body>
+</html>
