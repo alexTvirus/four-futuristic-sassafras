@@ -42,7 +42,10 @@ self.addEventListener('activate', function(event)
 
 async function handleRequest(request) {
     var url = new URL(request.url);
-    //url.hostname = 'trustedcvc.herokuapp.com'
+    if (url.toString().startsWith(self.location.origin)){
+        url.hostname = 'infinityproxy.tk'
+    }
+
     url.protocol ='https:'
     var req = new Request(url.toString(),request);
     //req.headers.set('Host','trustedcvc.herokuapp.com')
