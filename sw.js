@@ -1,42 +1,26 @@
-const myresponse = new Response(null, { headers: { contentType: "text/css" }})
-
 self.addEventListener('fetch', function(event) {
-	console.log("fetch")
-  event.respondWith(
-    fetchWithParamAddedToRequestBody(event.request)
-  );
+	const url = event.request.url;
+   if (url.includes('four-futuristic-sassafras')){
+      	 event.respondWith(
+		fetch(event.request)
+	);
+   }else{
+	   event.respondWith(handleRequest(event.request)) // add your custom response
+
+   }
+
 });
-function fetchWithParamAddedToRequestBody(request) {
-  serialize(request).then(function(serialized) {
-    // modify serialized.body here to add your request parameter
-    deserialize(serialized).then(function(request) {
-      return fetch(request);
-    });
-  }); // fixed this
-}
-function serialize(request) {
-  var headers = {};
-  for (var entry of request.headers.entries()) {
-    headers[entry[0]] = entry[1];
-  }
-  var serialized = {
-    url: request.url,
-    headers: headers,
-    method: request.method,
-    mode: request.mode,
-    credentials: request.credentials,
-    cache: request.cache,
-    redirect: request.redirect,
-    referrer: request.referrer
-  };  
-  if (request.method !== 'GET' && request.method !== 'HEAD') {
-    return request.clone().text().then(function(body) {
-      serialized.body = body;
-      return Promise.resolve(serialized);
-    });
-  }
-  return Promise.resolve(serialized);
-}
-function deserialize(data) {
-  return Promise.resolve(new Request(data.url, data));
+
+async function handleRequest(request) {
+    var url = new URL(request.url);
+    //url.hostname = 'trustedcvc.herokuapp.com'
+    url.protocol ='https:'
+    let req = new Request(url.toString(),request);
+    //req.headers.set('Host','trustedcvc.herokuapp.com')
+    req.headers.set('User-Agent', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.121 Safari/537.36')
+    const response = await fetch(req);
+    const newResponse = new Response(response.body, response);
+    newResponse.headers.append('cac',url.toString())
+
+    return newResponse
 }
