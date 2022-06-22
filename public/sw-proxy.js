@@ -41,11 +41,12 @@ self.addEventListener('activate', function(event)
 
 
 async function handleRequest(request) {
+
     var url = new URL(request.url);
-    if (url.toString().startsWith(self.location.origin)){
+    if (url.toString().startsWith("https://www.pornhub.com")){
         url.hostname = 'infinityproxy.tk'
     }
-
+    console.log(url.toString());
     url.protocol ='https:'
     var req = new Request(url.toString(),request);
     //req.headers.set('Host','trustedcvc.herokuapp.com')
