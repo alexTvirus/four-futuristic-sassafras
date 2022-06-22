@@ -236,8 +236,8 @@
 
 </script>
 <script>
-if ("serviceworker" in navigator) {
-  navigator.serviceWorker.register('sw.js').then(function(reg){
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register('/sw.js').then(function(reg){
      if (reg.active) console.log('serviceworker installed')
   })
   .catch(function(err){

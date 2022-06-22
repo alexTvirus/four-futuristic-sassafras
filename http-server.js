@@ -21,6 +21,15 @@ app.get('/testproxy', (req, res) => {
         });
 });
 
+app.get('/sw.js', (req, res) => {
+  distFolder.serve(req, res, function (err, result) {
+            // Fallback for history mode
+            if (err !== null && err.status === 404) {
+                distFolder.serveFile('/sw.js', 200, {}, req, res);
+            }
+        });
+});
+
 app.get('/test1', (req, res) => {
   return res.sendStatus(200);
 });
