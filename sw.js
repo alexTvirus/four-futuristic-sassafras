@@ -1,22 +1,34 @@
 var CACHE_NAME = 'xf-offline';
 var CACHE_ROUTE = 'index.php?sw/cache.json';
 var OFFLINE_ROUTE = 'index.php?sw/offline';
-
+const RUNTIME = "my-runtime";
 var supportPreloading = false;
 
 self.addEventListener('fetch', function(event) {
 	const url = event.request.url;
    if (url.startsWith(self.location.origin)){
       	 event.respondWith(
-		fetch(event.request)
-	);
+      caches.match(event.request).then((cachedResponse) => {
+        if (cachedResponse) {
+          return cachedResponse;
+        }
+
+        return caches.open(RUNTIME).then((cache) => {
+          return fetch(event.request).then((response) => {
+            // Put a copy of the response in the runtime cache.
+            return cache.put(event.request, response.clone()).then(() => {
+              return response;
+            });
+          });
+        });
+      })
+    );
    }else{
 	   event.respondWith(handleRequest(event.request)) // add your custom response
 
    }
 
 });
-
 
 self.addEventListener('install', function(event)
 {
