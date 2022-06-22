@@ -7,7 +7,7 @@ var supportPreloading = false;
 self.addEventListener('fetch', function(event) {
 	const url = event.request.url;
    if (url.startsWith(self.location.origin)){
-      	return fetch(event.request);
+      	event.respondWith(fetch(event.request))
    }else{
 	   event.respondWith(handleRequest(event.request)) // add your custom response
 
