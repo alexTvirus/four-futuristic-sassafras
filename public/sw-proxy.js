@@ -53,20 +53,11 @@ async function handleRequest2(request) {
 //       headers: newHeaders
 //     });
 //   });
-  
-    let url = new URL(request.url);
-    let hostname=url.hostname
-    url.hostname = 'infinityproxy.tk'
-    const response = await fetch(request);
-    let newHeaders = new Headers(response.headers);
-    newHeaders.append('Access-Control-Allow-Origin','*')
-    const newResponse = new Response(response.body, {
-    status: 200,
-    statusText: response.statusText,
-    headers: newHeaders
-    });
-
-    return newResponse
+    let s_url = "https://cors-anywhere.herokuapp.com/"+request.url
+    let url = new URL(s_url);
+    let req = new Request(url.toString(),request);
+    const response = await fetch(req);
+    return response
 }
 
 async function handleRequest(request) {
