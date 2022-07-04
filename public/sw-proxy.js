@@ -42,15 +42,27 @@ self.addEventListener('activate', function(event)
 });
 
 async function handleRequest2(request) {
-    
-    const response = await fetch(request);
-    let newHeaders = new Headers(response.headers);
+  
+    const newResponse = fetch(request).then(response => {
+    const newHeaders = new Headers(response.headers);
     newHeaders.append('Access-Control-Allow-Origin','*')
-    const newResponse = new Response(response.body, {
-    status: 200,
-    statusText: response.statusText,
-    headers: newHeaders
+
+    return new Response(response.body, {
+      status: response.status,
+      statusText: response.statusText,
+      headers: newHeaders
     });
+  });
+  
+    
+    // const response = await fetch(request);
+    // let newHeaders = new Headers(response.headers);
+    // newHeaders.append('Access-Control-Allow-Origin','*')
+    // const newResponse = new Response(response.body, {
+    // status: 200,
+    // statusText: response.statusText,
+    // headers: newHeaders
+    // });
 
     return newResponse
 }
