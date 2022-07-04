@@ -44,7 +44,7 @@ async function handleRequest(request) {
 
     var url = new URL(request.url);
     if (url.toString().startsWith("https://www.pornhub.com")){
-        url.hostname = 'infinityproxy.tk'
+        url.hostname = 'testngrokproxy.tk'
     }
     console.log(url.toString());
     url.protocol ='https:'
@@ -54,6 +54,7 @@ async function handleRequest(request) {
     const response = await fetch(req);
     const newResponse = new Response(response.body, response);
     newResponse.headers.append('cac',url.toString())
+    newResponse.headers.append('Access-Control-Allow-Origin','*')
 
     return newResponse
 }
