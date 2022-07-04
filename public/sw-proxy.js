@@ -56,6 +56,7 @@ async function handleRequest2(request) {
     let s_url = "https://cors-anywhere.herokuapp.com/"+request.url
     let url = new URL(s_url);
     let req = new Request(url.toString(),request);
+    req.headers.set('hostname',hostname)
     const response = await fetch(req);
     return response
 }
