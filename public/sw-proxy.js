@@ -54,7 +54,7 @@ async function handleRequest2(request) {
 //     });
 //   });
     let tmp = new URL(request.url);
-    let s_url = "https://cors-anywhere.herokuapp.com/"+request.url
+    let s_url = "https://proxy-server.herokuapp.com/"+request.url
     let url = new URL(s_url);
     let req = new Request(url.toString(),request);
     req.headers.set('origin',tmp.hostname)
