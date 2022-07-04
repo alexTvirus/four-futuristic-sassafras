@@ -47,7 +47,7 @@ async function handleRequest2(request) {
     let newHeaders = new Headers(response.headers);
     newHeaders.append('Access-Control-Allow-Origin','*')
     const newResponse = new Response(response.body, {
-    status: response.status,
+    status: 200,
     statusText: response.statusText,
     headers: newHeaders
     });
