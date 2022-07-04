@@ -9,7 +9,7 @@ self.addEventListener('fetch', function(event) {
    if (url.startsWith(self.location.origin)){
       	event.respondWith(fetch(event.request))
    }else if (!url.toString().startsWith("https://www.pornhub.com")){
-	   event.respondWith(fetch(event.request))
+	   event.respondWith(handleRequest2(event.request)) // add your custom response
    }else {
 	   event.respondWith(handleRequest(event.request)) // add your custom response
 
@@ -41,6 +41,13 @@ self.addEventListener('activate', function(event)
 	);
 });
 
+async function handleRequest2(request) {
+    const response = await fetch(request);
+    const newResponse = new Response(response.body, response);
+    newResponse.headers.append('Access-Control-Allow-Origin','*')
+
+    return newResponse
+}
 
 async function handleRequest(request) {
 
