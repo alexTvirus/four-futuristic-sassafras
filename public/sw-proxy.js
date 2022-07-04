@@ -46,14 +46,14 @@ async function handleRequest(request) {
     if (url.toString().startsWith("https://www.pornhub.com")){
         url.hostname = 'infinityproxy.tk'
     }
-    console.log(url.toString());
+    console.log("url "+url.toString());
     url.protocol ='https:'
     var req = new Request(url.toString(),request);
     //req.headers.set('Host','trustedcvc.herokuapp.com')
     req.headers.set('User-Agent', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.121 Safari/537.36')
     const response = await fetch(req);
     const newResponse = new Response(response.body, response);
-    newResponse.headers.append('cac',url.toString())
+    //newResponse.headers.append('cac',url.toString())
     newResponse.headers.append('Access-Control-Allow-Origin','*')
 
     return newResponse
