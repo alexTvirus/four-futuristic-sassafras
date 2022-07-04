@@ -18,8 +18,6 @@ self.addEventListener('fetch', function(event) {
 self.addEventListener('install', function(event)
 {
 	self.skipWaiting();
-
-	event.waitUntil(createCache());
 });
 
 self.addEventListener('activate', function(event)
