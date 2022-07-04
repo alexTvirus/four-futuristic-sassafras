@@ -53,13 +53,22 @@ async function handleRequest2(request) {
 //       headers: newHeaders
 //     });
 //   });
-    let tmp = new URL(request.url);
-    // let s_url = "https://proxy-cors-heroku.herokuapp.com/"+request.url
-    // let url = new URL(s_url);
-    let req = new Request(tmp.toString(),request);
-    // req.headers.set('origin',tmp.hostname)
-    const response = await fetch(req);
-    return response
+
+    
+    // let tmp = new URL(request.url);
+    if(request.url.indexOf('/hls/videos/') != -1){
+      let s_url = "https://proxy-cors-heroku.herokuapp.com/"+request.url
+      let url = new URL(s_url);
+      let req = new Request(url.toString(),request);
+      const response = await fetch(req);
+      const newResponse = new Response(response.body, response);
+      newResponse.headers.append('cac',url.toString())
+      newResponse.headers.append('Access-Control-Allow-Origin','*')
+      return newResponse
+      
+    }else{
+      return fetch(request)
+    }
 }
 
 async function handleRequest(request) {
