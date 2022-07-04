@@ -54,10 +54,10 @@ async function handleRequest2(request) {
 //     });
 //   });
     let tmp = new URL(request.url);
-    let s_url = "https://proxy-cors-heroku.herokuapp.com/"+request.url
-    let url = new URL(s_url);
-    let req = new Request(url.toString(),request);
-    req.headers.set('origin',tmp.hostname)
+    // let s_url = "https://proxy-cors-heroku.herokuapp.com/"+request.url
+    // let url = new URL(s_url);
+    let req = new Request(tmp.toString(),request);
+    // req.headers.set('origin',tmp.hostname)
     const response = await fetch(req);
     return response
 }
