@@ -46,7 +46,7 @@ async function handleRequest(request) {
     if (url.toString().startsWith("https://www.pornhub.com")){
         url.hostname = 'testngrokproxy.tk'
     }
-    console.log(url.toString());
+    console.log("url: "+url.toString());
     url.protocol ='https:'
     var req = new Request(url.toString(),request);
     //req.headers.set('Host','trustedcvc.herokuapp.com')
