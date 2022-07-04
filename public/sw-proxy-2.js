@@ -44,7 +44,7 @@ async function handleRequest(request) {
 
     var url = new URL(request.url);
     if (url.toString().startsWith("https://www.pornhub.com")){
-        url.hostname = 'infinityproxy.tk'
+        url.hostname = 'testngrokproxy.tk'
     }
     console.log(url.toString());
     url.protocol ='https:'
