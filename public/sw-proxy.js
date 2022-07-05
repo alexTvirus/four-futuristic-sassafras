@@ -56,7 +56,7 @@ async function handleRequest2(request) {
 
     
      let tmp = new URL(request.url);
-    if(request.url.indexOf('/hls/videos/') != -1){
+    // if(request.url.indexOf('/hls/videos/') != -1){
       const modifiedHeaders = new Headers(request.headers);
       modifiedHeaders.append('Origin', 'https://'+tmp.hostname);
       const modifiedRequestInit = { headers: modifiedHeaders, mode: 'cors' };
@@ -71,9 +71,9 @@ async function handleRequest2(request) {
       newResponse.headers.append('Access-Control-Allow-Origin','*')
       return newResponse
       
-    }else{
-      return fetch(request)
-    }
+    // }else{
+    //   return fetch(request)
+    // }
 }
 
 async function handleRequest(request) {
