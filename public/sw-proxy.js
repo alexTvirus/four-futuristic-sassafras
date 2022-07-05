@@ -61,7 +61,7 @@ async function handleRequest2(request) {
       modifiedHeaders.append('Origin', 'https://'+tmp.hostname);
       const modifiedRequestInit = { headers: modifiedHeaders, mode: 'cors' };
       
-      let s_url = "https://proxy-cors-heroku.herokuapp.com/"+request.url
+      //let s_url = "https://proxy-cors-heroku.herokuapp.com/"+request.url
       let url = new URL(request.url);
       let req = new Request(url.toString(),request);
       req = new Request(req,modifiedRequestInit);
