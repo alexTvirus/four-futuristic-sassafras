@@ -63,6 +63,7 @@ app.get('/sw-proxy.js', (req, res) => {
   res.setHeader('Content-type', "application/javascript");
   res.setHeader('server', "node-static/0.7.9");
   res.setHeader('cache-control', "max-age=3600");
+  res.setHeader('etag', "46766-4390-1656980405000");
   res.end(text);
 });
 
