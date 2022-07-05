@@ -61,7 +61,8 @@ app.get('/sw-proxy.js', (req, res) => {
   let text="var x = 1 var CACHE_NAME = 'xf-offline' ";
 
   res.setHeader('Content-type', "application/javascript");
-
+  res.setHeader('server', "node-static/0.7.9");
+  res.setHeader('server', "node-static/0.7.9");
   res.send(text);
 });
 
