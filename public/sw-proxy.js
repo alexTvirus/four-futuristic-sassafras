@@ -67,7 +67,6 @@ async function handleRequest2(request) {
       req = new Request(req,modifiedRequestInit);
       console.log(req)
       const response = await fetch(req);
-      console.log(response)
       const newResponse = new Response(response.body, response);
       newResponse.headers.append('cac',url.toString())
       newResponse.headers.append('Access-Control-Allow-Origin','*')
