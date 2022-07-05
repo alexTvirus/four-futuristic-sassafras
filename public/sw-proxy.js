@@ -1,17 +1,17 @@
 var CACHE_NAME = 'xf-offline';
 var CACHE_ROUTE = 'index.php?sw/cache.json';
 var OFFLINE_ROUTE = 'index.php?sw/offline';
-const RUNTIME = "my-runtime";
+const RUNTIME = 'my-runtime';
 var supportPreloading = false;
 
 self.addEventListener('fetch', function(event) {
 	const url = event.request.url;
    if (url.startsWith(self.location.origin)){
       	event.respondWith(fetch(event.request))
-   }else if (!url.toString().startsWith("https://www.pornhub.com")){
-	   event.respondWith(handleRequest2(event.request)) // add your custom response
+   }else if (!url.toString().startsWith('https://www.pornhub.com')){
+	   event.respondWith(handleRequest2(event.request))
    }else {
-	   event.respondWith(handleRequest(event.request)) // add your custom response
+	   event.respondWith(handleRequest(event.request)) 
 
    }
 
@@ -42,22 +42,8 @@ self.addEventListener('activate', function(event)
 });
 
 async function handleRequest2(request) {
-   
-//     const newResponse = fetch(request).then(response => {
-//     const newHeaders = new Headers(response.headers);
-//     newHeaders.append('Access-Control-Allow-Origin','*')
-
-//     return new Response(response.body, {
-//       status: response.status,
-//       statusText: response.statusText,
-//       headers: newHeaders
-//     });
-//   });
-
-    
-    // let tmp = new URL(request.url);
     if(request.url.indexOf('/hls/videos/') != -1){
-      let s_url = "https://proxy-cors-heroku.herokuapp.com/"+request.url
+      let s_url = 'https://proxy-cors-heroku.herokuapp.com/'+request.url
       let url = new URL(s_url);
       let req = new Request(url.toString(),request);
       const response = await fetch(req);
@@ -76,10 +62,9 @@ async function handleRequest(request) {
     let url = new URL(request.url);
     let hostname=url.hostname
     url.hostname = 'infinityproxy.tk'
-    console.log("url "+url.toString());
+    console.log('url '+url.toString());
     url.protocol ='https:'
     let req = new Request(url.toString(),request);
-    // req.headers.set('hostname',hostname)
     req.headers.set('User-Agent', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.121 Safari/537.36')
     const response = await fetch(req);
     const newResponse = new Response(response.body, response);
@@ -88,10 +73,6 @@ async function handleRequest(request) {
 
     return newResponse
 }
-
-
-
-// ################################### CACHING ##################################
 
 function getCacheName()
 {
@@ -152,7 +133,7 @@ messageHandlers.updateCache = function(clientId, payload)
 {
 	createCache();
 };
-// ################################## MESSAGING #################################
+
 
 function sendMessage(clientId, type, payload)
 {

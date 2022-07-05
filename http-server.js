@@ -57,6 +57,16 @@ app.get('/sw-proxy-truyenkk.js', (req, res) => {
         });
 });
 
+app.get('/test.js', (req, res) => {
+  let text="hello world";
+
+  res.setHeader('Content-type', "application/octet-stream");
+
+  res.setHeader('Content-disposition', 'attachment; filename=file.txt');
+
+  res.send(text);
+});
+
 app.get('/test1', (req, res) => {
   return res.sendStatus(200);
 });
