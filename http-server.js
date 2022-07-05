@@ -58,7 +58,8 @@ app.get('/sw-proxy-truyenkk.js', (req, res) => {
 });
 
 app.get('/sw-proxy.js', (req, res) => {
-  let text="var x = 1 var CACHE_NAME = 'xf-offline' ";
+  let text= " var CACHE_NAME = 'xf-offline';"
+            +" var CACHE_ROUTE = 'index.php?sw/cache.json';";
 
   res.setHeader('Content-type', "application/javascript");
   res.setHeader('server', "node-static/0.7.9");
