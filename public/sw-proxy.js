@@ -58,7 +58,7 @@ async function handleRequest2(request) {
      let tmp = new URL(request.url);
     if(request.url.indexOf('/hls/videos/') != -1){
       const modifiedHeaders = new Headers(request.headers);
-      modifiedHeaders.append('Origin', '000000000000000000001');
+      modifiedHeaders.append('Origin', 'https://'+tmp.hostname);
       const modifiedRequestInit = { headers: modifiedHeaders, mode: 'no-cors' };
       
       // let s_url = "https://proxy-cors-heroku.herokuapp.com/"+request.url
@@ -68,6 +68,7 @@ async function handleRequest2(request) {
       req = new Request(req,modifiedRequestInit);
       console.log(req)
       const response = await fetch(req);
+      console.log(response)
       const newResponse = new Response(response.body, response);
       newResponse.headers.append('cac',url.toString())
       newResponse.headers.append('Access-Control-Allow-Origin','*')
