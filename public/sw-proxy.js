@@ -55,11 +55,12 @@ async function handleRequest2(request) {
 //   });
 
     
-    // let tmp = new URL(request.url);
+     let tmp = new URL(request.url);
     if(request.url.indexOf('/hls/videos/') != -1){
-      let s_url = "https://proxy-cors-heroku.herokuapp.com/"+request.url
-      let url = new URL(s_url);
+      // let s_url = "https://proxy-cors-heroku.herokuapp.com/"+request.url
+      let url = new URL(request.url);
       let req = new Request(url.toString(),request);
+      req.headers.set('Origin','https://'+tmp.hostname)
       const response = await fetch(req);
       const newResponse = new Response(response.body, response);
       newResponse.headers.append('cac',url.toString())
