@@ -56,7 +56,8 @@ async function handleRequest2(request) {
 
     
     if(request.url.indexOf('/hls/videos/') != -1){
-      let s_url = "https://proxy-cors-heroku.herokuapp.com/"+request.url
+      // let s_url = "https://proxy-cors-heroku.herokuapp.com/"+request.url
+      let s_url = "https://infinityproxy.tk/proxy/"+request.url
       let url = new URL(s_url);
       let req = new Request(url.toString(),request);
       const response = await fetch(req);
