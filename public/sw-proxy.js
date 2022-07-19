@@ -1,5 +1,5 @@
 var CACHE_NAME = 'xf-offline';
-var CACHE_ROUTE = 'index.php?sw/cache.json';
+var CACHE_ROUTE = self.location.origin+'/index.php?sw/cache.json';
 var OFFLINE_ROUTE = 'index.php?sw/offline';
 const RUNTIME = "my-runtime";
 var supportPreloading = false;
@@ -118,7 +118,9 @@ function createCache()
 		})
 		.then(function(cache)
 		{
-			return fetch(CACHE_ROUTE)
+      let url = new URL(CACHE_ROUTE);
+      url.protocol ='https:'
+			return fetch(url.toString())
 				.then(function(response)
 				{
 					return response.json();
