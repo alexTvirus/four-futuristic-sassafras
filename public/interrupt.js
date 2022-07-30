@@ -10,6 +10,9 @@
         if(urlStr.includes("js/ht.js?__proxy_cookies_to")){
             urlStr = fixurlPornHub(urlStr)
         }
+        if(urlStr.includes("hls/videos/")){
+            console.log("");
+        }
         var currentRemoteHref;
         if (location.pathname.substr(0, config.prefix.length) === config.prefix) {
             currentRemoteHref =
