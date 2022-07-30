@@ -10,9 +10,7 @@
         if(urlStr.includes("js/ht.js?__proxy_cookies_to")){
             urlStr = fixurlPornHub(urlStr)
         }
-        if(urlStr.includes("hls/videos/")){
-            console.log("");
-        }
+
         var currentRemoteHref;
         if (location.pathname.substr(0, config.prefix.length) === config.prefix) {
             currentRemoteHref =
@@ -25,8 +23,9 @@
         }
         // check if it's already proxied (root-relative)
         if (urlStr.substr(0, config.prefix.length) === config.prefix) {
-            var proxyHost = location.host;
-            var isSecure = location.protocol === "https";
+            if(urlStr.includes("hls/videos/") && !urlStr.includes("https://infinityproxy.tk")){
+              urlStr = "https://infinityproxy.tk/proxy/"+urlStr
+            }
             return urlStr;
         }
 
