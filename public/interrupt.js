@@ -153,7 +153,7 @@
         var prefix = config.prefix;
         var proxyHost = location.host;
         var isSecure = location.protocol === "https";
-        var target = location.pathname.substr(prefix.length);
+        var target = "https://www.pornhub.com"+location.pathname;
         var targetURL = new URL(target);
 
         // ws:// or wss:// then at least one char for location,
