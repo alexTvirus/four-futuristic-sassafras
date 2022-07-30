@@ -22,6 +22,8 @@
         }
         // check if it's already proxied (root-relative)
         if (urlStr.substr(0, config.prefix.length) === config.prefix) {
+            var proxyHost = location.host;
+            var isSecure = location.protocol === "https";
             return urlStr;
         }
 
@@ -38,6 +40,7 @@
         // don't break data: urls, about:blank, etc
         // todo: do modify ws: and wss: protocols
         if (url.protocol !== "http:" && url.protocol !== "https:") {
+
             return urlStr;
         }
 
