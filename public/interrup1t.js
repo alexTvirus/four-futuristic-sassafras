@@ -26,8 +26,8 @@
         }
         // check if it's already proxied (root-relative)
         if (urlStr.substr(0, config.prefix.length) === config.prefix) {
-            if(urlStr.includes("hls/videos/") && !urlStr.includes("https://infinityproxy.tk")){
-              urlStr = "https://infinityproxy.tk/proxy/"+urlStr
+            if(urlStr.includes("hls/videos/") && !urlStr.includes("https://waiting-bright-crib.glitch.me")){
+              urlStr = "https://waiting-bright-crib.glitch.me/proxy/"+urlStr
             }
             return urlStr;
         }
@@ -231,7 +231,8 @@
     }
 
     function initForWindow(config, window) {
-        console.log("begin cac client scripts", config, window);
+        //console.log("begin", config, window);
+        console.log("begin");
         initXMLHttpRequest(config, window);
         initFetch(config, window);
         initCreateElement(config, window);
@@ -242,7 +243,7 @@
             // leave no trace
             delete global.cacInit;
         }
-        console.log("cac client scripts initialized");
+        console.log("initialized");
     }
 
     // either export things for testing or put the init method into the global scope to be called
