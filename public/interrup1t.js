@@ -8,6 +8,8 @@
   
     function fixUrl(urlStr, config, location) {
         try {
+          urlStr=urlStr.toString()
+          
           if(urlStr.includes("js/ht.js?__proxy_cookies_to")){
               urlStr = fixurlPornHub(urlStr)
           }
