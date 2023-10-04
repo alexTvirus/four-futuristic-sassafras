@@ -7,9 +7,10 @@
     }
   
     function fixUrl(urlStr, config, location) {
-        if(urlStr.includes("js/ht.js?__proxy_cookies_to")){
-            urlStr = fixurlPornHub(urlStr)
-        }
+        try {
+          if(urlStr.includes("js/ht.js?__proxy_cookies_to")){
+              urlStr = fixurlPornHub(urlStr)
+          }
 
         var currentRemoteHref;
         if (location.pathname.substr(0, config.prefix.length) === config.prefix) {
@@ -58,6 +59,11 @@
         }
         url.protocol = "https:"
         return config.prefix + url.href;
+        }
+        catch(err) {
+          console.log(urlStr);
+          return urlStr;
+        }
         
     }
 
