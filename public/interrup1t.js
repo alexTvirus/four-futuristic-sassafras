@@ -61,7 +61,7 @@
         return config.prefix + url.href;
         }
         catch(err) {
-          console.log(urlStr);
+          console.log(err);
           return urlStr;
         }
         
