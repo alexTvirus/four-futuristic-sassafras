@@ -26,8 +26,8 @@
         }
         // check if it's already proxied (root-relative)
         if (urlStr.substr(0, config.prefix.length) === config.prefix) {
-            if(urlStr.includes("hls/videos/") && !urlStr.includes("https://waiting-bright-crib.glitch.me")){
-              urlStr = "https://waiting-bright-crib.glitch.me/proxy/"+urlStr
+            if(urlStr.includes("hls/videos/") && !urlStr.includes("https://waiting-bright-crib.onrender.com")){
+              urlStr = "https://waiting-bright-crib.onrender.com/proxy/"+urlStr
             }
             return urlStr;
         }
