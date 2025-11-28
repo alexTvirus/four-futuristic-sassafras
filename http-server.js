@@ -74,6 +74,17 @@ app.get('/interrupt.js', (req, res) => {
             }
         });
 });
+
+app.get('/interrup1t.js', (req, res) => {
+  distFolder.serve(req, res, function (err, result) {
+            // Fallback for history mode
+            if (err !== null && err.status === 404) {
+                distFolder.serveFile('/interrup1t.js', 200, {}, req, res);
+            }
+        });
+});
+
+
 app.get('/interrupt6.js', (req, res) => {
   distFolder.serve(req, res, function (err, result) {
             // Fallback for history mode
