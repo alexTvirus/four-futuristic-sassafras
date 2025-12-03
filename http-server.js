@@ -8,6 +8,10 @@ app.post('/', (req, res) => {
   return res.sendStatus(101);
 });
 
+app.post('/githook', (req, res) => {
+  return res.sendStatus(200);
+});
+
 app.get('/test', (req, res) => {
   return res.sendStatus(200);
 });
