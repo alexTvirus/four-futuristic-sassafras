@@ -25,14 +25,14 @@
             currentRemoteHref = config.url;
         }
         // check if it's already proxied (root-relative)
-        // if (urlStr.substr(0, config.prefix.length) === config.prefix) {
-        //     if((urlStr.includes("hls/videos/") && !urlStr.includes("https://waiting-bright-crib.onrender.com")) || 
-        //        (urlStr.includes("/hls/") && !urlStr.includes("https://waiting-bright-crib.onrender.com"))
-        //       ){
-        //       urlStr = "https://waiting-bright-crib.onrender.com/proxy/"+urlStr
-        //     }
-        //     return urlStr;
-        // }
+        if (urlStr.substr(0, config.prefix.length) === config.prefix) {
+            if((urlStr.includes("hls/videos/") && !urlStr.includes("https://waiting-bright-crib.onrender.com")) || 
+               (urlStr.includes("/hls/") && !urlStr.includes("https://waiting-bright-crib.onrender.com"))
+              ){
+              urlStr = "https://waiting-bright-crib.onrender.com/proxy/"+urlStr
+            }
+            return urlStr;
+        }
 
         var url = new URL(urlStr, currentRemoteHref);
 
